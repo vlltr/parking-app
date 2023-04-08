@@ -1,7 +1,10 @@
 import { reactive, ref } from 'vue'
 import { defineStore } from 'pinia'
+import { useAuth } from '../stores/auth'
 
 export const useRegister = defineStore('register', () => {
+  const { login } = useAuth()
+
   const form = reactive({
     name: '',
     email: '',
@@ -13,7 +16,7 @@ export const useRegister = defineStore('register', () => {
 
   const loading = ref(false)
 
-  function resetForm() {
+  const resetForm = () => {
     form.name = ''
     form.email = ''
     form.password = ''
@@ -21,7 +24,7 @@ export const useRegister = defineStore('register', () => {
     errors.value = {}
   }
 
-  async function handleSubmit() {
+  const handleSubmit = async () => {
     if (loading.value) return
 
     loading.value = true
@@ -30,7 +33,8 @@ export const useRegister = defineStore('register', () => {
     return window.axios
       .post('auth/register', form)
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data.access_token)
+        login(response.data.access_token)
       })
       .catch((error) => {
         if (error.response.status === 422) {
@@ -43,5 +47,6 @@ export const useRegister = defineStore('register', () => {
         loading.value = false
       })
   }
+
   return { form, errors, loading, resetForm, handleSubmit }
 })
