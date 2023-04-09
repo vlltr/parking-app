@@ -8,6 +8,7 @@ export const useParking = defineStore('parking', () => {
   const loading = ref(false)
   const parkings = ref([])
   const stoppedParkings = ref([])
+  const parkingDetails = ref({})
 
   const form = reactive({
     vehicle_id: null,
@@ -56,6 +57,23 @@ export const useParking = defineStore('parking', () => {
     })
   }
 
+  const resetParkingDetails = () => {
+    parkingDetails.value = {}
+  }
+
+  const getParking = (parking) => {
+    return window.axios
+      .get(`parkings/${parking.id}`)
+      .then((response) => {
+        parkingDetails.value = response.data.data
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          router.push({ name: 'not-found' })
+        }
+      })
+  }
+
   return {
     form,
     errors,
@@ -67,5 +85,8 @@ export const useParking = defineStore('parking', () => {
     stopParking,
     getStoppedParkings,
     stoppedParkings,
+    parking: parkingDetails,
+    getParking,
+    resetParkingDetails
   }
 })
