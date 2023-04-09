@@ -63,6 +63,12 @@ const router = createRouter({
       component: () => import("../views/Parkings/OrderParking.vue"),
     },
     {
+      path: "/parkings/history",
+      name: "parkings.history",
+      beforeEnter: auth,
+      component: () => import("../views/Parkings/ParkingHistory.vue"),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue')
