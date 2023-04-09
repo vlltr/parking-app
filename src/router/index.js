@@ -6,43 +6,43 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: import('../views/HomeView.vue')
+      component: () => import('../views/HomeView.vue')
     },
     {
       path: '/register',
       name: 'register',
       beforeEnter: guest,
-      component: import('../views/Auth/RegisterView.vue')
+      component: () => import('../views/Auth/RegisterView.vue')
     },
     {
       path: '/login',
       name: 'login',
       beforeEnter: guest,
-      component: import('../views/Auth/LoginView.vue')
+      component: () => import('../views/Auth/LoginView.vue')
     },
     {
       path: '/profile',
       name: 'profile.edit',
       beforeEnter: auth,
-      component: import('../views/Profile/EditView.vue')
+      component: () => import('../views/Profile/EditView.vue')
     },
     {
       path: '/profile/change-password',
       name: 'profile.change-password',
       beforeEnter: auth,
-      component: import('../views/Profile/ChangePassword.vue')
+      component: () => import('../views/Profile/ChangePassword.vue')
     },
     {
       path: '/vehicles',
       name: 'vehicles.index',
       beforeEnter: auth,
-      component: import('../views/Vehicles/IndexView.vue')
+      component: () => import('../views/Vehicles/IndexView.vue')
     },
     {
       path: "/vehicles/create",
       name: "vehicles.create",
       beforeEnter: auth,
-      component: import("../views/Vehicles/CreateView.vue"),
+      component: () => import("../views/Vehicles/CreateView.vue"),
     },
   ]
 })

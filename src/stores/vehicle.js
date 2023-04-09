@@ -12,6 +12,8 @@ export const useVehicle = defineStore('vehicle', () => {
     description: ''
   })
 
+  const vehicles = ref([])
+
   const resetForm = () => {
     form.plate_number = ''
     form.description = ''
@@ -37,6 +39,10 @@ export const useVehicle = defineStore('vehicle', () => {
       })
       .finally(() => (loading.value = false))
   }
-  
-  return { form, errors, loading, resetForm, storeVehicle }
+
+  const getVehicles = () => {
+    return window.axios.get('vehicles').then((response) => (vehicles.value = response.data.data))
+  }
+
+  return { form, errors, loading, resetForm, storeVehicle, vehicles, getVehicles }
 })
