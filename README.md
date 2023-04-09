@@ -1,6 +1,6 @@
-# parking-app
+# parking-app front end
 
-This template should help get you started developing with Vue 3 in Vite.
+his is the front-end app for parking application you need to run this project for the back-end [psychotic-celery](https://github.com/vlltr/psychotic-celery)
 
 ## Recommended IDE Setup
 
@@ -15,7 +15,11 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ```sh
 npm install
 ```
+### create environment file
 
+```sh
+cp .env.example .env
+```
 ### Compile and Hot-Reload for Development
 
 ```sh
