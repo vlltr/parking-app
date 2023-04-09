@@ -44,5 +44,46 @@ export const useVehicle = defineStore('vehicle', () => {
     return window.axios.get('vehicles').then((response) => (vehicles.value = response.data.data))
   }
 
-  return { form, errors, loading, resetForm, storeVehicle, vehicles, getVehicles }
+  const updateVehicle = (vehicle) => {
+    if (loading.value) return
+    loading.value = true
+    errors.value = {}
+
+    return window.axios.put(`vehicles/${vehicle.id}`, form).then(() => {
+      router
+        .push({ name: 'vehicles.index' })
+        .catch((error) => {
+          if (error.response.status === 422) {
+            errors.value = error.response.data.errors
+          }
+        })
+        .finally(() => (loading.value = false))
+    })
+  }
+
+  const getVehicle = (vehicle) => {
+    return window.axios
+      .get(`vehicles/${vehicle.id}`)
+      .then((response) => {
+        form.plate_number = response.data.data.plate_number
+        form.description = response.data.data.description
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          router.push({ name: 'not-found' })
+        }
+      })
+  }
+
+  return {
+    form,
+    errors,
+    loading,
+    resetForm,
+    storeVehicle,
+    vehicles,
+    getVehicles,
+    updateVehicle,
+    getVehicle
+  }
 })
