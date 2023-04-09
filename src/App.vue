@@ -12,9 +12,9 @@ const auth = useAuth();
         <div class="flex gap-4 items-center">
           <h2 class="text-xl font-bold">
             <div class="inline-flex items-center justify-center bg-blue-600 w-6 h-6 text-center text-white rounded">
-              P
+              L
             </div>
-            myParking
+            LaraParking
           </h2>
 
           <template v-if="auth.check">
@@ -30,9 +30,15 @@ const auth = useAuth();
         </div>
         <div class="flex gap-4 items-center">
           <template v-if="auth.check">
+            <RouterLink class="router-link" :to="{ name: 'profile.edit' }">
+              Profile
+            </RouterLink>
             <button @click="auth.logout" class="router-link">Logout</button>
           </template>
           <template v-else>
+            <RouterLink class="router-link" :to="{ name: 'login' }">
+              Login
+            </RouterLink>
             <RouterLink class="router-link" :to="{ name: 'register' }">
               Register
             </RouterLink>

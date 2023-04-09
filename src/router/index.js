@@ -15,6 +15,18 @@ const router = createRouter({
       component: import('../views/Auth/RegisterView.vue')
     },
     {
+      path: '/login',
+      name: 'login',
+      beforeEnter: guest,
+      component: import('../views/Auth/LoginView.vue')
+    },
+    {
+      path: '/profile',
+      name: 'profile.edit',
+      beforeEnter: auth,
+      component: import('../views/Profile/EditView.vue')
+    },
+    {
       path: '/vehicles',
       name: 'vehicles.index',
       beforeEnter: auth,

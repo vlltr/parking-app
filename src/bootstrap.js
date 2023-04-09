@@ -11,7 +11,7 @@ window.axios.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       const { destroyTokenAndRedirectTo } = useAuth()
-      destroyTokenAndRedirectTo('register')
+      destroyTokenAndRedirectTo()
     }
 
     return Promise.reject(error)
