@@ -1,1 +1,1 @@
-<template>Home view</template>
+<template>Welcome to LaraParking</template>
